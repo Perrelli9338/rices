@@ -27,7 +27,8 @@ from collections import deque
 icon_map_path = "/home/eight/.config/eww/scripts/workspaces_map.json"
 
 HYPRLAND_INSTANCE_SIGNATURE = os.getenv('HYPRLAND_INSTANCE_SIGNATURE')
-SOCKET_PATH = f"/tmp/hypr/{HYPRLAND_INSTANCE_SIGNATURE}/.socket2.sock"
+XDG_RUNTIME_DIR = os.getenv('XDG_RUNTIME_DIR')
+SOCKET_PATH = f"{XDG_RUNTIME_DIR}/hypr/{HYPRLAND_INSTANCE_SIGNATURE}/.socket2.sock"
 
 def main():
     with open(icon_map_path, "r") as icon_map_buf:

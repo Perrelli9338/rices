@@ -17,7 +17,7 @@ def update_workspace(active_workspace):
 
 sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
 
-server_address = f'/tmp/hypr/{os.environ["HYPRLAND_INSTANCE_SIGNATURE"]}/.socket2.sock'
+server_address = f'{os.environ["XDG_RUNTIME_DIR"]}/hypr/{os.environ["HYPRLAND_INSTANCE_SIGNATURE"]}/.socket2.sock'
 
 sock.connect(server_address)
 
