@@ -1,0 +1,12 @@
+#!/bin/bash
+
+output=""
+
+while true; do
+	output=$(nmcli -f IN-USE,SIGNAL device wifi | awk '/^\*/{if (NR!=1) {print $2}}')
+	if [ -n "$output" ]; then
+		echo $output"%" 
+	else
+		echo "no"
+	fi
+done

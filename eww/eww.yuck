@@ -1,0 +1,152 @@
+(include "./workspaces_hyprland.yuck")
+
+;; variables
+
+(deflisten window :initial " " "sh ~/.config/eww/scripts/get-window-title")
+
+(defvar home_dir "/home/$USER/.config/eww/scripts")
+
+(defpoll status_b :interval "5m" ``)
+
+(deflisten strength_wifi :initial " " "sh ~/.config/eww/scripts/network --perc")
+
+;; (defpoll strength_wifi :interval "5m" `nmcli dev wifi | awk 'NR == 2 {print $8}'`)
+
+(defpoll clipboard_content :interval "1s"
+        `/home/$USER/.config/eww/Scripts/clipboard_manager.py`)
+
+(defpoll ip :interval "1m" 
+`sh ~/.config/eww/scripts/ip`)
+
+
+(defpoll date :interval "1m"
+	`sh ~/.config/eww/scripts/time 1`)
+
+(defpoll time :interval "1m"
+	`sh ~/.config/eww/scripts/time 0`)
+
+(defpoll batperc :interval "5m"
+	`bash ~/.config/eww/scripts/battery --perc`)
+
+(defpoll baticon :interval "5m"
+	`bash ~/.config/eww/scripts/battery --icon`)
+
+(deflisten volicon :initial "" "sh ~/.config/eww/scripts/volume --icon")
+
+(deflisten volperc :initial "100" "sh ~/.config/eww/scripts/volume --perc")
+
+;; (deflisten workspaces :initial "[]" "bash ~/.config/eww/scripts/get-workspaces")
+;; (deflisten current_workspace :initial "1" "bash ~/.config/eww/scripts/get-active-workspace")
+
+;; window
+
+(defwindow bar
+	:monitor 0
+	:windowtype "dock"
+	:geometry (geometry 
+			:width "100%"
+			:anchor "top center"
+			)
+	:exclusive true	
+
+	(box :class "main-container"
+	
+	(left)
+	(center)
+	(right)
+	)
+)
+
+;; widget
+
+(defwidget right []
+  (box :class "time_battery" :halign "end" :orientation "h"
+       :space-evenly false
+       :halign "end"
+       :spacing 25
+(systray)
+(bluetooth)
+(volume)
+(network)
+(cpu)
+(ram)
+;;(temperature)
+;; (brightness)
+(battery)
+(time)
+(powermenu)
+	)
+)
+
+(defwidget ram []
+(box :space-evenly false :width "0"
+(label :text "${EWW_RAM.used_mem }" :limit-width 2 :show-truncated false) 
+(label :text "% ")))
+
+(defwidget cpu []
+(box :space-evenly false :width "0"
+(label :text "${EWW_CPU.avg }" :limit-width 2 :show-truncated false) 
+(label :text "% ")))
+
+
+(defwidget volume []
+(eventbox :onscroll "bash ~/.config/eww/scripts/volume {}"
+(box :space-evenly true :width "0"
+(eventbox :onclick "pavucontrol &"
+(label :text "${volperc}% ${volicon}")))))
+
+(defwidget network []
+(tooltip "${ip}"
+(box
+(eventbox :onclick "~/.config/eww/scripts/wofi-wifi.sh &"
+(label :text "${strength_wifi} ")))))
+
+(defwidget bluetooth []
+(box :space-evenly true :width "0"
+(eventbox :onclick "~/.config/eww/scripts/wofi-bluetooth &"
+(label :text "${status_b}  "))))
+
+(defwidget powermenu []
+(box :class "powermenu" :space-evenly true :width "0"
+(eventbox :onclick "wlogout &"
+(label :text "⚙"))))
+
+(defwidget battery []
+  (box :space-evenly true :width "0"
+    (label :text "${batperc} ${baticon}")
+    )
+)
+
+(defwidget time []
+(tooltip "${date}"
+(box :space-evenly true :width "0"
+(label :text "${time}"))))
+
+
+(defwidget center []
+  (box :orientation "h" 
+	   :space-evenly false  
+       :halign "center"
+	   :class "time_battery"
+       (window_w)
+  )
+)
+
+(defwidget left []
+  (box 
+       :orientation "h"
+	   :space-evenly false
+       ;;:class "workspaces" 
+       :halign "start" 
+	;; (literal :content "${workspaces}"))
+	   (workspaces)
+  )
+)
+
+(defwidget window_w []
+  (box
+    (label :text "${window}" :show-truncated true
+    )
+  )
+
+)
