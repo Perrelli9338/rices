@@ -1,0 +1,13 @@
+(defwidget battery []
+  (tooltip "${EWW_BATTERY.BAT1.status}"
+  (box :space-evenly true :width "0"
+    (label :text "
+    ${EWW_BATTERY.BAT1.capacity}% ${
+    EWW_BATTERY.BAT1.status == 'Charging' ? '' :
+    EWW_BATTERY.BAT1.capacity > 90 ? ' ' :
+    EWW_BATTERY.BAT1.capacity > 75 ? ' ' :
+    EWW_BATTERY.BAT1.capacity > 50 ? ' ' :
+    EWW_BATTERY.BAT1.capacity > 25 ? ' ' : ' '
+    }" :show-truncated false
+    )
+    )))
