@@ -1,5 +1,0 @@
-#!/bin/sh
-
-ip=$(ip addr | sed -n 11p | sed 's/.*inet \([^ ]*\).*/\1/')
-
-echo $ip

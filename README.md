@@ -1,13 +1,11 @@
-# My rices
-## Packages
-All packages to install in one command, packages is not in order
-```
-pacman -Syuu && pacman -S yay
-```  
-```
-yay -s wofi wlogout hyprland eww alacritty git cliphist rofiemoji swaylock nemo
-```
-After that  
-```
-git clone https://github.com/Perrelli9338/rices.git
-``` 
+# Field of my rice 🌾
+![desktop](desktop.jpeg "Desktop")
+<section style="text-align: center;">
+
+_(This is what would look like)_
+</section>
+
+## Config
+Default is for Arch Linux and derivatives distro, so check out `config.sh` and edit it as you like
+## Install
+If you trust me just execute `installer.sh`, or check the scripts.
