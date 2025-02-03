@@ -1,10 +1,9 @@
 #!/bin/bash
 
-PKG="sudo pacman" # Distro package
-INSTALL_ARG="-S"
+source ../config.sh
 
 # We need to install rust
-sudo $PKG $INSTALL_ARG rustup, base-devel
+$PKG $INSTALL_ARG rustup, base-devel
 
 # Install rust components
 rustup # accept all defaults
