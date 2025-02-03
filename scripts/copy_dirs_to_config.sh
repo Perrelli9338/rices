@@ -7,7 +7,7 @@ DEST_DIR="$HOME/.config"
 # List all directories excluding 'scripts', '.idea', and others
 directories_to_copy=()
 for dir in "$SOURCE_DIR"/*; do
-    if [ -d "$dir" ] && [[ ! "$dir" =~ /scripts$ ]] && [[ ! "$dir" =~ /\.idea$ ]]; then
+    if [ -d "$dir" ] && [[ ! "$dir" =~ /scripts$ ]] && [[ ! "$dir" =~ /fonts$ ]] && [[ ! "$dir" =~ /\.idea$ ]]; then
         directories_to_copy+=("$dir")
     fi
 done
