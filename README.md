@@ -1,3 +1,5 @@
+> [!WARNING]
+> I don't use this setup anymore; I've moved on to something else. I might update this at some point.
 # Field of my rice 🌾
 ![desktop](desktop.jpeg "Desktop")
 <section style="text-align: center;">
